@@ -1,0 +1,47 @@
+Sub oudbeeld()
+Cells.Interior.ColorIndex = xlColorIndexNone
+Dim X As Long, Y As Long, factorx As Double, factory As Double, punt(1 To 3) As Long, afstand As Long, pose(1 To 3) As Long, wtr As Byte
+punt(3) = l - 1
+punt(2) = Int(l / 2) + TextBox2.Text
+punt(1) = Int(l / 2) + TextBox3.Text
+tlr(1) = 1
+Do Until tlr(1) > 3
+If posa(tlr(1)) > 0 Then
+punt(tlr(1)) = posa(tlr(1))
+Else
+If posa(tlr(1)) > l Then
+Else: punt(tlr(1)) = posa(tlr(1))
+End If
+End If
+tlr(1) = tlr(1) + 1
+Loop
+Y = 1
+Do Until Y > schaal
+factory = (((Y - 1) / (schaal - 1)) - 0.5) * 1.8
+X = 1
+Do Until X > schaal
+wtr = 0
+pos(3) = punt(3)
+If punt(3) > l Then pos(3) = l
+pos(2) = punt(2)
+pos(1) = punt(1)
+'80-gradenhoek
+factorx = (((X - 1) / (schaal - 1)) - 0.5) * 1.8
+Do Until pos(3) < 1
+afstand = l - pos(3)
+pos(1) = Int((posa(3) - pos(3)) * factorx + l / 2)
+pos(2) = Int((posa(3) - pos(3)) * factory + l / 2)
+If pos(1) < 1 Then Call kleur(10, X, Y, afstand, wtr): Exit Do
+If pos(2) < 1 Then Call kleur(10, X, Y, afstand, wtr): Exit Do
+If pos(1) > l Then Call kleur(10, X, Y, afstand, wtr): Exit Do
+If pos(2) > l Then Call kleur(10, X, Y, afstand, wtr): Exit Do
+a = blk(pos(1), pos(2), pos(3))
+If a = 1 Then wtr = wtr + 1
+If a > 1 Then Call kleur(a, X, Y, afstand, wtr): Exit Do
+pos(3) = pos(3) - 1
+Loop
+X = X + 1
+Loop
+Y = Y + 1
+Loop
+End Sub

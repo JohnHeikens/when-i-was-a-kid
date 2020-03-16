@@ -1,0 +1,15 @@
+@echo off
+title WereldWijd
+color 0a
+print"hallo"
+
+:A
+set input=
+set /p input=input:
+if %input%==ww goto b
+goto A
+
+:b
+start www.s.nl
+cls
+goto A
